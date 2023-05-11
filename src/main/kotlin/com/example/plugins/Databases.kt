@@ -7,6 +7,9 @@ import io.ktor.server.response.*
 import io.ktor.server.application.*
 import io.ktor.server.routing.*
 
+/**
+ * Esta función configura las bases de datos usadas por la app.
+ */
 fun Application.configureDatabases() {
     val database = Database.connect(
         url = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1",

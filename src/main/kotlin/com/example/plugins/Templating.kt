@@ -7,6 +7,10 @@ import io.ktor.server.response.*
 import io.ktor.server.application.*
 import io.ktor.server.routing.*
 
+/**
+ * Esta función configura el motor de plantillas para el servidor web, que en este caso es
+ * FreeMarker.
+ */
 fun Application.configureTemplating() {
     install(FreeMarker) {
         templateLoader = ClassTemplateLoader(this::class.java.classLoader, "templates")

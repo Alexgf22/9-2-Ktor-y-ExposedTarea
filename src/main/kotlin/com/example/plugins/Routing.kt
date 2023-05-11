@@ -9,11 +9,15 @@ import io.ktor.server.routing.*
 import io.ktor.server.util.*
 import com.example.models.Article
 
+/**
+ * Esta función configura las rutas utilizadas por la app, incluyendo la redirección de la
+ * ruta principal a la lista de artículos, el manejo de la creación, actualización y eliminación de artículos
+ * y la visualización de un artículo específico.
+ */
 fun Application.configureRouting() {
-    routing {
+    routing {// Función de enrutamiento que configura las rutas de la app
 
         /*
-
         redirige todas GET las solicitudes realizadas a la /ruta a /articles
          */
         get("/") {
@@ -33,6 +37,8 @@ fun Application.configureRouting() {
             get("new") {
                 call.respond(FreeMarkerContent("new.ftl", model = null))
             }
+
+            // Crea un nuevo artículo a partir de los parámetros enviados en el formulario.
             post {
                 val formParameters = call.receiveParameters()
                 val title = formParameters.getOrFail("title")
@@ -41,14 +47,25 @@ fun Application.configureRouting() {
                 articles.add(newEntry)
                 call.respondRedirect("/articles/${newEntry.id}")
             }
+
+            // Para mostrar el contenido de un artículo específico, se usa el ID del artículo como parámetro de ruta
             get("{id}") {
                 val id = call.parameters.getOrFail<Int>("id").toInt()
                 call.respond(FreeMarkerContent("show.ftl", mapOf("article" to articles.find { it.id == id })))
             }
+
+            // Ruta para editar un artículo. ('call.parameters') se usa para obtener el identificador del artículo
+            // y encontrar este artículo en un almacén
             get("{id}/edit") {
                 val id = call.parameters.getOrFail<Int>("id").toInt()
                 call.respond(FreeMarkerContent("edit.ftl", mapOf("article" to articles.find { it.id == id })))
             }
+
+            /*
+            En primer lugar, con call.parameters, obtenemos el ID del artículo a editar.
+            Con call.receiveParameters se usa para que un usuario inicie la acción (update o delete)
+            Dependiendo de la acción, el artículo se actualiza o elimina del almacenamiento.
+             */
             post("{id}") {
                 val id = call.parameters.getOrFail<Int>("id").toInt()
                 val formParameters = call.receiveParameters()
