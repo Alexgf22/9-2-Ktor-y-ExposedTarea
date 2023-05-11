@@ -12,12 +12,20 @@ import com.example.models.Article
 fun Application.configureRouting() {
     routing {
 
+        /*
+
+        redirige todas GET las solicitudes realizadas a la /ruta a /articles
+         */
         get("/") {
             call.respondRedirect("articles")
         }
 
         route("articles") {
 
+            /*
+            FreeMarkerContent() , objeto que representa el contenido para ser enviado al cliente.
+            Acepta dos parámetros: template: nombre de la plantilla, model: le pasamos una lista de archivos
+             */
             get {
                 call.respond(FreeMarkerContent("index.ftl", mapOf("articles" to articles)))
             }
