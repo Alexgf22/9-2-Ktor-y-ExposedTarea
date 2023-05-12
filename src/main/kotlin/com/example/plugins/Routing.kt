@@ -10,27 +10,35 @@ import io.ktor.server.util.*
 import com.example.dao.DAOFacadeImpl
 import com.example.dao.dao
 
+
 /**
  * Esta función configura las rutas utilizadas por la app, incluyendo la redirección de la
  * ruta principal a la lista de artículos, el manejo de la creación, actualización y eliminación de artículos
  * y la visualización de un artículo específico.
  */
+
 fun Application.configureRouting() {
     routing {// Función de enrutamiento que configura las rutas de la app
 
-        /*
-        redirige todas GET las solicitudes realizadas a la /ruta a /articles
-         */
+
+
+        // redirige todas GET las solicitudes realizadas a la /ruta a /articles
+
+
         get("/") {
             call.respondRedirect("articles")
         }
 
         route("articles") {
 
+
+
             /*
             FreeMarkerContent() , objeto que representa el contenido para ser enviado al cliente.
             Acepta dos parámetros: template: nombre de la plantilla, model: le pasamos una lista de archivos
+
              */
+
             get {
                 call.respond(FreeMarkerContent("index.ftl", mapOf("articles" to dao.allArticles())))
                 }
@@ -53,16 +61,20 @@ fun Application.configureRouting() {
                 val id = call.parameters.getOrFail<Int>("id").toInt()
                 call.respond(FreeMarkerContent("show.ftl", mapOf("article" to dao.article(id))))
             }
-            /* Ruta para editar un artículo. ('call.parameters') se usa para obtener el identificador del artículo
-             y encontrar este artículo en un almacén
-             */
+
+
+
+             /*Ruta para editar un artículo. ('call.parameters') se usa para obtener el identificador del artículo
+               y encontrar este artículo en un almacén
+              */
             get("{id}/edit") {
                 val id = call.parameters.getOrFail<Int>("id").toInt()
                 call.respond(FreeMarkerContent("edit.ftl", mapOf("article" to dao.article(id))))
             }
 
-            /*
-            En primer lugar, con call.parameters, obtenemos el ID del artículo a editar.
+
+
+            /*En primer lugar, con call.parameters, obtenemos el ID del artículo a editar.
             Con call.receiveParameters se usa para que un usuario inicie la acción (update o delete)
             Dependiendo de la acción, el artículo se actualiza o elimina del almacenamiento.
              */
@@ -85,6 +97,7 @@ fun Application.configureRouting() {
         }
     }
 }
+
 
 
 
