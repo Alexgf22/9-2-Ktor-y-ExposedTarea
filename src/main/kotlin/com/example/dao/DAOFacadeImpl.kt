@@ -6,6 +6,10 @@ import kotlinx.coroutines.runBlocking
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 
+/**
+ * Esta clase implementa las funciones de la interfaz DAOFacade para poder añadir artículo,
+ * eliminar artículo, editar artículo, devolver todos los artículos...
+ */
 class DAOFacadeImpl : DAOFacade {
 
     private fun resultRowToArticle(row: ResultRow) = Article(
