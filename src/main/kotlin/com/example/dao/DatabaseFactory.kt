@@ -6,6 +6,10 @@ import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.*
 import org.jetbrains.exposed.sql.transactions.experimental.*
 
+/**
+ * En esta clase objeto DatabaseFactory, se configura la base de datos H2 en el
+ * init y crea la tabla "Articles" mediante SchemaUtils de la biblioteca "Exposed".
+ */
 object DatabaseFactory {
     fun init() {
         val driverClassName = "org.h2.Driver"
@@ -16,6 +20,11 @@ object DatabaseFactory {
         }
     }
 
+    /**
+     * Este método suspendido usa la función de orden superior
+     * newSuspendedTransaction para ejecutar de forma segura las consultas en
+     * la base de datos.
+     */
     suspend fun <T> dbQuery(block: suspend () -> T): T =
         newSuspendedTransaction(Dispatchers.IO) { block() }
 }
