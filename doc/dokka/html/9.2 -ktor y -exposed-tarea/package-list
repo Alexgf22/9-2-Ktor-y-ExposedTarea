@@ -1,0 +1,62 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:com.example.dao////PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.dao/index.html
+$dokka.location:com.example.dao//dao/#/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.dao/dao.html
+$dokka.location:com.example.dao/DAOFacade///PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.dao/-d-a-o-facade/index.html
+$dokka.location:com.example.dao/DAOFacade/addNewArticle/#kotlin.String#kotlin.String/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.dao/-d-a-o-facade/add-new-article.html
+$dokka.location:com.example.dao/DAOFacade/allArticles/#/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.dao/-d-a-o-facade/all-articles.html
+$dokka.location:com.example.dao/DAOFacade/article/#kotlin.Int/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.dao/-d-a-o-facade/article.html
+$dokka.location:com.example.dao/DAOFacade/deleteArticle/#kotlin.Int/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.dao/-d-a-o-facade/delete-article.html
+$dokka.location:com.example.dao/DAOFacade/editArticle/#kotlin.Int#kotlin.String#kotlin.String/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.dao/-d-a-o-facade/edit-article.html
+$dokka.location:com.example.dao/DAOFacadeImpl///PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.dao/-d-a-o-facade-impl/index.html
+$dokka.location:com.example.dao/DAOFacadeImpl/DAOFacadeImpl/#/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.dao/-d-a-o-facade-impl/-d-a-o-facade-impl.html
+$dokka.location:com.example.dao/DAOFacadeImpl/addNewArticle/#kotlin.String#kotlin.String/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.dao/-d-a-o-facade-impl/add-new-article.html
+$dokka.location:com.example.dao/DAOFacadeImpl/allArticles/#/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.dao/-d-a-o-facade-impl/all-articles.html
+$dokka.location:com.example.dao/DAOFacadeImpl/article/#kotlin.Int/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.dao/-d-a-o-facade-impl/article.html
+$dokka.location:com.example.dao/DAOFacadeImpl/deleteArticle/#kotlin.Int/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.dao/-d-a-o-facade-impl/delete-article.html
+$dokka.location:com.example.dao/DAOFacadeImpl/editArticle/#kotlin.Int#kotlin.String#kotlin.String/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.dao/-d-a-o-facade-impl/edit-article.html
+$dokka.location:com.example.dao/DatabaseFactory///PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.dao/-database-factory/index.html
+$dokka.location:com.example.dao/DatabaseFactory/dbQuery/#kotlin.coroutines.SuspendFunction0[TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.dao/-database-factory/db-query.html
+$dokka.location:com.example.dao/DatabaseFactory/init/#/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.dao/-database-factory/init.html
+$dokka.location:com.example.models////PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.models/index.html
+$dokka.location:com.example.models/Article///PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.models/-article/index.html
+$dokka.location:com.example.models/Article/Article/#kotlin.Int#kotlin.String#kotlin.String/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.models/-article/-article.html
+$dokka.location:com.example.models/Article/body/#/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.models/-article/body.html
+$dokka.location:com.example.models/Article/id/#/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.models/-article/id.html
+$dokka.location:com.example.models/Article/title/#/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.models/-article/title.html
+$dokka.location:com.example.models/Articles///PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.models/-articles/index.html
+$dokka.location:com.example.models/Articles/body/#/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.models/-articles/body.html
+$dokka.location:com.example.models/Articles/id/#/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.models/-articles/id.html
+$dokka.location:com.example.models/Articles/primaryKey/#/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.models/-articles/primary-key.html
+$dokka.location:com.example.models/Articles/title/#/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.models/-articles/title.html
+$dokka.location:com.example.plugins////PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.plugins/index.html
+$dokka.location:com.example.plugins//configureDatabases/io.ktor.server.application.Application#/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.plugins/configure-databases.html
+$dokka.location:com.example.plugins//configureRouting/io.ktor.server.application.Application#/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.plugins/configure-routing.html
+$dokka.location:com.example.plugins//configureSerialization/io.ktor.server.application.Application#/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.plugins/configure-serialization.html
+$dokka.location:com.example.plugins//configureTemplating/io.ktor.server.application.Application#/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.plugins/configure-templating.html
+$dokka.location:com.example.plugins/IndexData///PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.plugins/-index-data/index.html
+$dokka.location:com.example.plugins/IndexData/IndexData/#kotlin.collections.List[kotlin.Int]/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.plugins/-index-data/-index-data.html
+$dokka.location:com.example.plugins/IndexData/items/#/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.plugins/-index-data/items.html
+$dokka.location:com.example.plugins/User///PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.plugins/-user/index.html
+$dokka.location:com.example.plugins/User/User/#kotlin.String#kotlin.Int/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.plugins/-user/-user.html
+$dokka.location:com.example.plugins/User/age/#/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.plugins/-user/age.html
+$dokka.location:com.example.plugins/User/name/#/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.plugins/-user/name.html
+$dokka.location:com.example.plugins/UserService.Users///PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.plugins/-user-service/-users/index.html
+$dokka.location:com.example.plugins/UserService.Users/age/#/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.plugins/-user-service/-users/age.html
+$dokka.location:com.example.plugins/UserService.Users/id/#/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.plugins/-user-service/-users/id.html
+$dokka.location:com.example.plugins/UserService.Users/name/#/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.plugins/-user-service/-users/name.html
+$dokka.location:com.example.plugins/UserService.Users/primaryKey/#/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.plugins/-user-service/-users/primary-key.html
+$dokka.location:com.example.plugins/UserService///PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.plugins/-user-service/index.html
+$dokka.location:com.example.plugins/UserService/UserService/#org.jetbrains.exposed.sql.Database/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.plugins/-user-service/-user-service.html
+$dokka.location:com.example.plugins/UserService/create/#com.example.plugins.User/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.plugins/-user-service/create.html
+$dokka.location:com.example.plugins/UserService/delete/#kotlin.Int/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.plugins/-user-service/delete.html
+$dokka.location:com.example.plugins/UserService/read/#kotlin.Int/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.plugins/-user-service/read.html
+$dokka.location:com.example.plugins/UserService/update/#kotlin.Int#com.example.plugins.User/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example.plugins/-user-service/update.html
+$dokka.location:com.example////PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example/index.html
+$dokka.location:com.example//main/#/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example/main.html
+$dokka.location:com.example//module/io.ktor.server.application.Application#/PointingToDeclaration/9.2 -ktor y -exposed-tarea/com.example/module.html
+com.example
+com.example.dao
+com.example.models
+com.example.plugins
+
