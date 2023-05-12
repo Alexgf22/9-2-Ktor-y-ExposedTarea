@@ -7,7 +7,8 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.util.*
-import com.example.models.Article
+import com.example.dao.DAOFacadeImpl
+import com.example.dao.dao
 
 /**
  * Esta función configura las rutas utilizadas por la app, incluyendo la redirección de la
@@ -31,8 +32,8 @@ fun Application.configureRouting() {
             Acepta dos parámetros: template: nombre de la plantilla, model: le pasamos una lista de archivos
              */
             get {
-                call.respond(FreeMarkerContent("index.ftl", mapOf("articles" to articles)))
-            }
+                call.respond(FreeMarkerContent("index.ftl", mapOf("articles" to dao.allArticles())))
+                }
 
             get("new") {
                 call.respond(FreeMarkerContent("new.ftl", model = null))
@@ -43,22 +44,21 @@ fun Application.configureRouting() {
                 val formParameters = call.receiveParameters()
                 val title = formParameters.getOrFail("title")
                 val body = formParameters.getOrFail("body")
-                val newEntry = Article.newEntry(title, body)
-                articles.add(newEntry)
-                call.respondRedirect("/articles/${newEntry.id}")
+                val article = dao.addNewArticle(title, body)
+                call.respondRedirect("/articles/${article?.id}")
             }
 
             // Para mostrar el contenido de un artículo específico, se usa el ID del artículo como parámetro de ruta
             get("{id}") {
                 val id = call.parameters.getOrFail<Int>("id").toInt()
-                call.respond(FreeMarkerContent("show.ftl", mapOf("article" to articles.find { it.id == id })))
+                call.respond(FreeMarkerContent("show.ftl", mapOf("article" to dao.article(id))))
             }
-
-            // Ruta para editar un artículo. ('call.parameters') se usa para obtener el identificador del artículo
-            // y encontrar este artículo en un almacén
+            /* Ruta para editar un artículo. ('call.parameters') se usa para obtener el identificador del artículo
+             y encontrar este artículo en un almacén
+             */
             get("{id}/edit") {
                 val id = call.parameters.getOrFail<Int>("id").toInt()
-                call.respond(FreeMarkerContent("edit.ftl", mapOf("article" to articles.find { it.id == id })))
+                call.respond(FreeMarkerContent("edit.ftl", mapOf("article" to dao.article(id))))
             }
 
             /*
@@ -71,15 +71,13 @@ fun Application.configureRouting() {
                 val formParameters = call.receiveParameters()
                 when (formParameters.getOrFail("_action")) {
                     "update" -> {
-                        val index = articles.indexOf(articles.find { it.id == id })
                         val title = formParameters.getOrFail("title")
                         val body = formParameters.getOrFail("body")
-                        articles[index].title = title
-                        articles[index].body = body
+                        dao.editArticle(id, title, body)
                         call.respondRedirect("/articles/$id")
                     }
                     "delete" -> {
-                        articles.removeIf { it.id == id }
+                        dao.deleteArticle(id)
                         call.respondRedirect("/articles")
                     }
                 }

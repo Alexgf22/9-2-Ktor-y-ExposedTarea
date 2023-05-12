@@ -5,10 +5,14 @@
         <h3>Edit article</h3>
         <form action="/articles/${article.id}" method="post">
             <p>
-                <input type="text" name="title" value="${article.title}">
+                <label>
+                    <input type="text" name="title" value="${article.title}">
+                </label>
             </p>
             <p>
-                <textarea name="body">${article.body}</textarea>
+                <label>
+                    <textarea name="body">${article.body}</textarea>
+                </label>
             </p>
             <p>
                 <input type="submit" name="_action" value="update">

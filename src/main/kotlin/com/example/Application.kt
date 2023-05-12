@@ -1,5 +1,7 @@
 package com.example
 
+import com.example.dao.DatabaseFactory
+import com.example.dao.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
@@ -29,8 +31,7 @@ fun main() {
  *
  */
 fun Application.module() {
-    configureTemplating()
-    configureSerialization()
-    configureDatabases()
+    DatabaseFactory.init()
     configureRouting()
+    configureTemplating()
 }

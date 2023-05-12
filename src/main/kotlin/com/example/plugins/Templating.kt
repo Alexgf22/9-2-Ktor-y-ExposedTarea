@@ -23,4 +23,9 @@ fun Application.configureTemplating() {
     }
 }
 
+/**
+ * @property items List<Int>  lista de números enteros.
+ * Esta clase sirve para encapsular datos que serán usados en el índice de una lista,
+ * por ejemplo, en una paginación.
+ */
 data class IndexData(val items: List<Int>)
