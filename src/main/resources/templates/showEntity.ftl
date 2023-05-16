@@ -3,10 +3,10 @@
 <@layout.header>
     <div>
         <h3>
-            Name: ${entity.name}
+            Campo: ${entity.name}
         </h3>
         <p>
-            Description: ${entity.description}
+            ID: ${entity.id}
         </p>
         <p>
             Value: ${entity.value}
@@ -17,10 +17,11 @@
         <p>
             Order: ${entity.order}
         </p>
+        <p>
+            Description: ${entity.description}
+        </p>
         <hr>
         <p>
-            <!-- Este enlace en la parte inferior de esta página debe abrir un formulario
-             para editar o eliminar este item. -->
             <a href="/entities/${entity.id}/editEntity">Edit entity</a>
         </p>
     </div>
