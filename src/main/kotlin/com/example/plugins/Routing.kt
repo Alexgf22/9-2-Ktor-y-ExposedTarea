@@ -9,6 +9,7 @@ import io.ktor.server.routing.*
 import io.ktor.server.util.*
 import com.example.dao.DAOFacadeImpl
 import com.example.dao.dao
+import com.example.dao.daoEntity
 
 
 /**
@@ -26,7 +27,7 @@ fun Application.configureRouting() {
 
 
         get("/") {
-            call.respondRedirect("articles")
+            call.respondRedirect("entities")
         }
 
         route("articles") {
@@ -95,6 +96,82 @@ fun Application.configureRouting() {
                 }
             }
         }
+
+
+
+        // Entidad Campo
+
+
+        route("entities") {
+
+            /*
+            FreeMarkerContent() , objeto que representa el contenido para ser enviado al cliente.
+            Acepta dos parámetros: template: nombre de la plantilla, model: le pasamos una lista de archivos
+             */
+            get {
+                call.respond(FreeMarkerContent("indexEntity.ftl", mapOf("entities" to daoEntity.allEntities())))
+            }
+
+            get("newEntity") {
+                call.respond(FreeMarkerContent("newEntity.ftl", model = null))
+            }
+
+            // Crea un nuevo item a partir de los parámetros enviados en el formulario.
+            post {
+                val formParameters = call.receiveParameters()
+                val value = formParameters.getOrFail("value")
+                val name = formParameters.getOrFail("name")
+                val description = formParameters.getOrFail("description")
+                val sectionId = formParameters.getOrFail("sectionId")
+                val order = formParameters.getOrFail<Int>("order").toInt()
+                val entity = daoEntity.addNewEntity(value, name, description, sectionId, order)
+                call.respondRedirect("/entities/${entity?.id}")
+            }
+
+            // Para mostrar el contenido de un item específico, se usa el ID del item como parámetro de ruta
+            get("{id}") {
+                val id = call.parameters.getOrFail<Int>("id")
+                call.respond(FreeMarkerContent("showEntity.ftl", mapOf("entity" to daoEntity.entity(id))))
+            }
+            /* Ruta para editar un item. ('call.parameters') se usa para obtener el identificador del item
+             y encontrar este item en un almacén
+             */
+            get("{id}/editEntity") {
+                val id = call.parameters.getOrFail<Int>("id")
+                call.respond(FreeMarkerContent("editEntity.ftl", mapOf("entity" to daoEntity.entity(id))))
+            }
+
+            /*
+            En primer lugar, con call.parameters, obtenemos el ID del item a editar.
+            Con call.receiveParameters se usa para que un usuario inicie la acción (update o delete)
+            Dependiendo de la acción, el item se actualiza o elimina del almacenamiento.
+             */
+            post("{id}") {
+                val id = call.parameters.getOrFail<Int>("id")
+                val formParameters = call.receiveParameters()
+                when (formParameters.getOrFail("_action")) {
+                    "update" -> {
+                        val value = formParameters.getOrFail("value")
+                        val name = formParameters.getOrFail("name")
+                        val description = formParameters.getOrFail("description")
+                        val sectionId = formParameters.getOrFail("sectionId")
+                        val order = formParameters.getOrFail<Int>("order").toInt()
+                        daoEntity.editEntity(id, value, name, description, sectionId, order)
+                        call.respondRedirect("/entities/$id")
+                    }
+                    "delete" -> {
+                        daoEntity.deleteEntity(id)
+                        call.respondRedirect("/entities")
+                    }
+                }
+            }
+        }
+
+
+
+
+
+
     }
 }
 
