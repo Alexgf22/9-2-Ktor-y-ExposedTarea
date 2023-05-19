@@ -1,11 +1,11 @@
 package com.example.dao
 
 import com.example.dao.DatabaseFactory.dbQuery
-import com.example.models.*
+import com.example.models.Article
+import com.example.models.Articles
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import com.example.dao.*
 
 /**
  * Esta clase implementa las funciones de la interfaz DAOFacade para poder añadir artículo,
@@ -26,6 +26,7 @@ class DAOFacadeImpl : DAOFacade {
         id = row[Articles.id],
         title = row[Articles.title],
         body = row[Articles.body],
+        sectionId = row[Articles.sectionId]
     )
 
 
@@ -84,10 +85,11 @@ class DAOFacadeImpl : DAOFacade {
      * clase ResultRow, aplica el resultado que saque la consulta con el operador de elvis. Si
      * la consulta no retorna nada, devolvería null.
      */
-    override suspend fun addNewArticle(title: String, body: String): Article? = dbQuery {
+    override suspend fun addNewArticle(title: String, body: String, sectionId: String): Article? = dbQuery {
         val insertStatement = Articles.insert {
             it[Articles.title] = title
             it[Articles.body] = body
+            it[Articles.sectionId] = sectionId
         }
         insertStatement.resultedValues?.singleOrNull()?.let(::resultRowToArticle)
     }
@@ -111,10 +113,11 @@ class DAOFacadeImpl : DAOFacade {
      *
      * @return Boolean  retorna true si la actualización afectó a una fila o más, sino, retorna false.
      */
-    override suspend fun editArticle(id: Int, title: String, body: String): Boolean = dbQuery {
+    override suspend fun editArticle(id: Int, title: String, body: String, sectionId: String): Boolean = dbQuery {
         Articles.update({ Articles.id eq id }) {
             it[Articles.title] = title
             it[Articles.body] = body
+            it[Articles.sectionId] = sectionId
         } > 0
     }
 
@@ -149,7 +152,8 @@ class DAOFacadeImpl : DAOFacade {
 val dao: DAOFacade = DAOFacadeImpl().apply {
     runBlocking {
         if(allArticles().isEmpty()) {
-            addNewArticle("The drive to develop!", "...it's what keeps me going.")
+            addNewArticle("The drive to develop!", "...it's what keeps me going.",
+                "A")
         }
     }
 }

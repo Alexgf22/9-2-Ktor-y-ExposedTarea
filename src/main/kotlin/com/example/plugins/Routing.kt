@@ -1,15 +1,13 @@
 package com.example.plugins
 
-import com.example.models.*
+import com.example.dao.dao
+import com.example.dao.daoEntity
 import io.ktor.server.application.*
 import io.ktor.server.freemarker.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.util.*
-import com.example.dao.DAOFacadeImpl
-import com.example.dao.dao
-import com.example.dao.daoEntity
 
 
 /**
@@ -27,7 +25,7 @@ fun Application.configureRouting() {
 
 
         get("/") {
-            call.respondRedirect("entities")
+            call.respondRedirect("articles")
         }
 
         route("articles") {
@@ -53,7 +51,8 @@ fun Application.configureRouting() {
                 val formParameters = call.receiveParameters()
                 val title = formParameters.getOrFail("title")
                 val body = formParameters.getOrFail("body")
-                val article = dao.addNewArticle(title, body)
+                val sectionId = formParameters.getOrFail("sectionId")
+                val article = dao.addNewArticle(title, body, sectionId)
                 call.respondRedirect("/articles/${article?.id}")
             }
 
@@ -86,7 +85,8 @@ fun Application.configureRouting() {
                     "update" -> {
                         val title = formParameters.getOrFail("title")
                         val body = formParameters.getOrFail("body")
-                        dao.editArticle(id, title, body)
+                        val sectionId = formParameters.getOrFail("sectionId")
+                        dao.editArticle(id, title, body, sectionId)
                         call.respondRedirect("/articles/$id")
                     }
                     "delete" -> {

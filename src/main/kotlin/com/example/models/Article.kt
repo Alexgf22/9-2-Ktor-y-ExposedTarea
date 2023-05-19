@@ -13,7 +13,7 @@ import org.jetbrains.exposed.sql.*
  * La variable idCounter es un contador atómico que se usa para generar
  * identificadores únicos para cada artículo.
  */
-data class Article(val id: Int, val title: String, val body: String)
+data class Article(val id: Int, val title: String, val body: String, val sectionId: String)
 
 /**
  * Clase object llamada: Articles que extiende la clase Table.
@@ -29,6 +29,7 @@ object Articles: Table() {
     // Columna de tipo varchar con una longitud max. de 128 caracteres
     val title = varchar("title", 128)
     val body = varchar("body", 1024)
+    val sectionId = varchar("sectionId", 32)
 
     // En este caso define la clave primaria de la tabla Articles
     override val primaryKey = PrimaryKey(id)
