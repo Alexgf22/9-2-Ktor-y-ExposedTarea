@@ -41,11 +41,11 @@ fun Application.configureRouting() {
              */
 
             get {
-                call.respond(FreeMarkerContent("index.ftl", mapOf("articles" to dao.allArticles())))
+                call.respond(FreeMarkerContent("indexArticle.ftl", mapOf("articles" to dao.allArticles())))
                 }
 
             get("new") {
-                call.respond(FreeMarkerContent("new.ftl", model = null))
+                call.respond(FreeMarkerContent("newArticle.ftl", mapOf("entities" to daoEntity.allEntities())))
             }
 
             // Crea un nuevo artículo a partir de los parámetros enviados en el formulario.
@@ -60,7 +60,7 @@ fun Application.configureRouting() {
             // Para mostrar el contenido de un artículo específico, se usa el ID del artículo como parámetro de ruta
             get("{id}") {
                 val id = call.parameters.getOrFail<Int>("id").toInt()
-                call.respond(FreeMarkerContent("show.ftl", mapOf("article" to dao.article(id))))
+                call.respond(FreeMarkerContent("showArticle.ftl", mapOf("article" to dao.article(id))))
             }
 
 
@@ -70,7 +70,7 @@ fun Application.configureRouting() {
               */
             get("{id}/edit") {
                 val id = call.parameters.getOrFail<Int>("id").toInt()
-                call.respond(FreeMarkerContent("edit.ftl", mapOf("article" to dao.article(id))))
+                call.respond(FreeMarkerContent("editArticle.ftl", mapOf("article" to dao.article(id))))
             }
 
 

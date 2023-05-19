@@ -1,3 +1,4 @@
+<#-- @ftlvariable name="entities" type="kotlin.collections.List<com.example.models.Entity>"-->
 <#import "_layout.ftl" as layout />
 <@layout.header>
     <div>
@@ -16,6 +17,12 @@
             <p>
                 <input type="submit">
             </p>
+
+            <select id="selectSectionId">
+                <#list entities as entity>
+                    <option value="${entity.id}">${entity.sectionId}</option>
+                </#list>
+            </select>
         </form>
     </div>
 </@layout.header>

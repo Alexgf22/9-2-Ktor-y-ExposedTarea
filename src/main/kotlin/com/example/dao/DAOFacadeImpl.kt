@@ -5,6 +5,7 @@ import com.example.models.*
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import com.example.dao.*
 
 /**
  * Esta clase implementa las funciones de la interfaz DAOFacade para poder añadir artículo,
@@ -40,6 +41,9 @@ class DAOFacadeImpl : DAOFacade {
     override suspend fun allArticles(): List<Article> = dbQuery {
         Articles.selectAll().map(::resultRowToArticle)
     }
+
+
+
 
 
     /**

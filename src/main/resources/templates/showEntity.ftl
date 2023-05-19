@@ -20,6 +20,7 @@
         <p>
             Description: ${entity.description}
         </p>
+
         <hr>
         <p>
             <a href="/entities/${entity.id}/editEntity">Edit entity</a>

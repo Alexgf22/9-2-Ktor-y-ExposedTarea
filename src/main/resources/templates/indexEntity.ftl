@@ -8,10 +8,16 @@
             </h3>
             <p>Value: ${entity.value}</p>
             <p>SectionId: ${entity.sectionId}</p>
-            <p>Description: ${entity.value}</p>
+            <p>Description: ${entity.description}</p>
             <p>Order: ${entity.order}</p>
         </div>
     </#list>
+
+    <select id="selectSectionId">
+        <#list entities as entity>
+            <option value="${entity.id}">${entity.sectionId}</option>
+        </#list>
+    </select>
     <hr>
     <p>
         <a href="/entities/newEntity">Create entity</a>
