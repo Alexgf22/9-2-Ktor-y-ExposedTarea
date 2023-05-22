@@ -12,7 +12,7 @@
         <p>
             <!-- Este enlace en la parte inferior de esta página debe abrir un formulario
              para editar o eliminar este artículo. -->
-            <a href="/articles/${article.id}/edit">Edit article</a>
+            <a href="/articles/${article.id}/editArticle">Edit article</a>
         </p>
     </div>
 </@layout.header>

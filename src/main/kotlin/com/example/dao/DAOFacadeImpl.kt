@@ -25,8 +25,7 @@ class DAOFacadeImpl : DAOFacade {
     private fun resultRowToArticle(row: ResultRow) = Article(
         id = row[Articles.id],
         title = row[Articles.title],
-        body = row[Articles.body],
-        sectionId = row[Articles.sectionId]
+        body = row[Articles.body]
     )
 
 
@@ -85,11 +84,10 @@ class DAOFacadeImpl : DAOFacade {
      * clase ResultRow, aplica el resultado que saque la consulta con el operador de elvis. Si
      * la consulta no retorna nada, devolvería null.
      */
-    override suspend fun addNewArticle(title: String, body: String, sectionId: String): Article? = dbQuery {
+    override suspend fun addNewArticle(title: String, body: String): Article? = dbQuery {
         val insertStatement = Articles.insert {
             it[Articles.title] = title
             it[Articles.body] = body
-            it[Articles.sectionId] = sectionId
         }
         insertStatement.resultedValues?.singleOrNull()?.let(::resultRowToArticle)
     }
@@ -99,6 +97,7 @@ class DAOFacadeImpl : DAOFacade {
      * @param id: Int identificador único del artículo.
      * @param title: String  título del artículo.
      * @param body: String  cuerpo del artículo.
+     *
      * La función editArticle es una función suspend que usa la función de orden superior dbQuery
      * para ejecutar una consulta de forma más segura en la base de datos.
      *
@@ -113,11 +112,10 @@ class DAOFacadeImpl : DAOFacade {
      *
      * @return Boolean  retorna true si la actualización afectó a una fila o más, sino, retorna false.
      */
-    override suspend fun editArticle(id: Int, title: String, body: String, sectionId: String): Boolean = dbQuery {
+    override suspend fun editArticle(id: Int, title: String, body: String): Boolean = dbQuery {
         Articles.update({ Articles.id eq id }) {
             it[Articles.title] = title
             it[Articles.body] = body
-            it[Articles.sectionId] = sectionId
         } > 0
     }
 
@@ -152,8 +150,7 @@ class DAOFacadeImpl : DAOFacade {
 val dao: DAOFacade = DAOFacadeImpl().apply {
     runBlocking {
         if(allArticles().isEmpty()) {
-            addNewArticle("The drive to develop!", "...it's what keeps me going.",
-                "A")
+            addNewArticle("The drive to develop!", "...it's what keeps me going.")
         }
     }
 }

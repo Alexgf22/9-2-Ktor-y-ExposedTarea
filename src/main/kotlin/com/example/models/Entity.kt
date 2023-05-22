@@ -9,7 +9,8 @@ data class Entity(
     val name: String,
     val description: String,
     val sectionId: String,
-    val order: Int)
+    val order: Int,
+    val idArticle: Int)
 
 
 object Entities: Table() {
@@ -19,6 +20,7 @@ object Entities: Table() {
     val description = varchar("description", 256)
     val sectionId = varchar("sectionId", 32)
     val order = integer("order")
+    val idArticle = integer("idArticle").references(Articles.id)
 
     override val primaryKey = PrimaryKey(id)
 }

@@ -21,7 +21,7 @@
 </#list>
 <hr>
 <p>
-    <a href="/articles/new">Create article</a>
+    <a href="/articles/newArticle">Create article</a>
 </p>
 </body>
 </html>

@@ -10,13 +10,15 @@ interface DAOEntity {
                              name: String,
                              description: String,
                              sectionId: String,
-                             order: Int): Entity?
+                             order: Int,
+                             idArticle: Int): Entity?
     suspend fun editEntity(id: Int,
                            value: String,
                            name: String,
                            description: String,
                            sectionId: String,
-                           order: Int): Boolean
+                           order: Int,
+                           idArticle: Int): Boolean
     suspend fun deleteEntity(id: Int): Boolean
 
 }

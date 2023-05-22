@@ -18,8 +18,7 @@ object DatabaseFactory {
         val password = "user"
         val database = Database.connect(jdbcURL, driverClassName, user,password)
         transaction(database) {
-            SchemaUtils.create(Articles)
-            SchemaUtils.create(Entities)
+            SchemaUtils.create(Articles, Entities)
         }
     }
 

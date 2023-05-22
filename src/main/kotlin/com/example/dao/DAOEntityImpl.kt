@@ -23,7 +23,8 @@ class DAOEntityImpl : DAOEntity{
         name = row[Entities.name],
         description = row[Entities.description],
         sectionId = row[Entities.sectionId],
-        order = row[Entities.order]
+        order = row[Entities.order],
+        idArticle = row[Entities.idArticle]
     )
 
     /**
@@ -69,6 +70,7 @@ class DAOEntityImpl : DAOEntity{
      * @param description: String  descripción del item.
      * @param sectionId: String  sectionId del item.
      * @param order: Int  cantidad de items.
+     * @param idArticle: Int identificador del artículo.
      *
      * La función addNewEntity es una función suspend que usa la función de orden superior
      * dbQuery para ejecutar una consulta de manera segura en la base de datos.
@@ -86,13 +88,15 @@ class DAOEntityImpl : DAOEntity{
         name: String,
         description: String,
         sectionId: String,
-        order: Int): Entity? = dbQuery {
+        order: Int,
+        idArticle: Int): Entity? = dbQuery {
         val insertStatement = Entities.insert {
             it[Entities.value] = value
             it[Entities.name] = name
             it[Entities.description] = description
             it[Entities.sectionId] = sectionId
             it[Entities.order] = order
+            it[Entities.idArticle] = idArticle
         }
         insertStatement.resultedValues?.singleOrNull()?.let(::resultRowToEntity)
     }
@@ -105,6 +109,7 @@ class DAOEntityImpl : DAOEntity{
      * @param description: String  descripción del item.
      * @param sectionId: String  sectionId del item.
      * @param order: Int  cantidad de items.
+     * @param idArticle: Int identificador del artículo.
      *
      * La función editEntity.ftl es una función suspend que usa la función de orden superior dbQuery
      * para ejecutar una consulta de forma más segura en la base de datos.
@@ -126,13 +131,15 @@ class DAOEntityImpl : DAOEntity{
                                     name: String,
                                     description: String,
                                     sectionId: String,
-                                    order: Int): Boolean = DatabaseFactory.dbQuery {
+                                    order: Int,
+                                    idArticle: Int): Boolean = dbQuery {
         Entities.update({ Entities.id eq id }) {
             it[Entities.value] = value
             it[Entities.name] = name
             it[Entities.description] = description
             it[Entities.sectionId] = sectionId
             it[Entities.order] = order
+            it[Entities.idArticle] = idArticle
         } > 0
     }
 
@@ -149,7 +156,7 @@ class DAOEntityImpl : DAOEntity{
      * @return Boolean  retorna true si por lo menos una fila es eliminada de la tabla "Entities" y
      * false en caso contrario.
      */
-    override suspend fun deleteEntity(id: Int): Boolean = DatabaseFactory.dbQuery {
+    override suspend fun deleteEntity(id: Int): Boolean = dbQuery {
         Entities.deleteWhere { Entities.id eq id } > 0
     }
 }
@@ -164,7 +171,7 @@ class DAOEntityImpl : DAOEntity{
 val daoEntity: DAOEntity = DAOEntityImpl().apply {
     runBlocking {
         if(allEntities().isEmpty()) {
-            addNewEntity("1024,43", "Iphone 14", "Es un móvil increíble con unas características imbatibles", "A", 10 )
+            addNewEntity("1024,43", "Iphone 14", "Es un móvil increíble con unas características imbatibles", "A", 10, 1 )
         }
     }
 }

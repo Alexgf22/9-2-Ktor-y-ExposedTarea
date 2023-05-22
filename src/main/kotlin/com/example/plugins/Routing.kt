@@ -25,7 +25,7 @@ fun Application.configureRouting() {
 
 
         get("/") {
-            call.respondRedirect("articles")
+            call.respondRedirect("entities")
         }
 
         route("articles") {
@@ -43,7 +43,7 @@ fun Application.configureRouting() {
                 }
 
             get("new") {
-                call.respond(FreeMarkerContent("newArticle.ftl", mapOf("entities" to daoEntity.allEntities())))
+                call.respond(FreeMarkerContent("newArticle.ftl", model = null))
             }
 
             // Crea un nuevo artículo a partir de los parámetros enviados en el formulario.
@@ -51,8 +51,7 @@ fun Application.configureRouting() {
                 val formParameters = call.receiveParameters()
                 val title = formParameters.getOrFail("title")
                 val body = formParameters.getOrFail("body")
-                val sectionId = formParameters.getOrFail("sectionId")
-                val article = dao.addNewArticle(title, body, sectionId)
+                val article = dao.addNewArticle(title, body)
                 call.respondRedirect("/articles/${article?.id}")
             }
 
@@ -85,8 +84,7 @@ fun Application.configureRouting() {
                     "update" -> {
                         val title = formParameters.getOrFail("title")
                         val body = formParameters.getOrFail("body")
-                        val sectionId = formParameters.getOrFail("sectionId")
-                        dao.editArticle(id, title, body, sectionId)
+                        dao.editArticle(id, title, body)
                         call.respondRedirect("/articles/$id")
                     }
                     "delete" -> {
@@ -113,7 +111,7 @@ fun Application.configureRouting() {
             }
 
             get("newEntity") {
-                call.respond(FreeMarkerContent("newEntity.ftl", model = null))
+                call.respond(FreeMarkerContent("newEntity.ftl", mapOf("articles" to dao.allArticles())))
             }
 
             // Crea un nuevo item a partir de los parámetros enviados en el formulario.
@@ -124,7 +122,8 @@ fun Application.configureRouting() {
                 val description = formParameters.getOrFail("description")
                 val sectionId = formParameters.getOrFail("sectionId")
                 val order = formParameters.getOrFail<Int>("order").toInt()
-                val entity = daoEntity.addNewEntity(value, name, description, sectionId, order)
+                val idArticle = formParameters.getOrFail("idArticle").toInt()
+                val entity = daoEntity.addNewEntity(value, name, description, sectionId, order, idArticle)
                 call.respondRedirect("/entities/${entity?.id}")
             }
 
@@ -156,7 +155,8 @@ fun Application.configureRouting() {
                         val description = formParameters.getOrFail("description")
                         val sectionId = formParameters.getOrFail("sectionId")
                         val order = formParameters.getOrFail<Int>("order").toInt()
-                        daoEntity.editEntity(id, value, name, description, sectionId, order)
+                        val idArticle = formParameters.getOrFail("idArticle").toInt()
+                        daoEntity.editEntity(id, value, name, description, sectionId, order, idArticle)
                         call.respondRedirect("/entities/$id")
                     }
                     "delete" -> {

@@ -11,13 +11,10 @@
             <p>Description: ${entity.description}</p>
             <p>Order: ${entity.order}</p>
         </div>
+
     </#list>
 
-    <select id="selectSectionId">
-        <#list entities as entity>
-            <option value="${entity.id}">${entity.sectionId}</option>
-        </#list>
-    </select>
+
     <hr>
     <p>
         <a href="/entities/newEntity">Create entity</a>
