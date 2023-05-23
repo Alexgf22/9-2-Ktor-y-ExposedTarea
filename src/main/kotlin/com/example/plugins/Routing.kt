@@ -25,11 +25,11 @@ fun Application.configureRouting() {
 
 
         get("/") {
-            call.respondRedirect("entities")
+            call.respondRedirect("articles")
         }
 
-        route("articles") {
 
+        route("articles") {
 
 
             /*
@@ -57,7 +57,7 @@ fun Application.configureRouting() {
 
             // Para mostrar el contenido de un artículo específico, se usa el ID del artículo como parámetro de ruta
             get("{id}") {
-                val id = call.parameters.getOrFail<Int>("id").toInt()
+                val id = call.parameters.getOrFail("id").toInt()
                 call.respond(FreeMarkerContent("showArticle.ftl", mapOf("article" to dao.article(id))))
             }
 
@@ -67,7 +67,7 @@ fun Application.configureRouting() {
                y encontrar este artículo en un almacén
               */
             get("{id}/edit") {
-                val id = call.parameters.getOrFail<Int>("id").toInt()
+                val id = call.parameters.getOrFail("id").toInt()
                 call.respond(FreeMarkerContent("editArticle.ftl", mapOf("article" to dao.article(id))))
             }
 
@@ -78,7 +78,7 @@ fun Application.configureRouting() {
             Dependiendo de la acción, el artículo se actualiza o elimina del almacenamiento.
              */
             post("{id}") {
-                val id = call.parameters.getOrFail<Int>("id").toInt()
+                val id = call.parameters.getOrFail("id").toInt()
                 val formParameters = call.receiveParameters()
                 when (formParameters.getOrFail("_action")) {
                     "update" -> {
@@ -110,8 +110,8 @@ fun Application.configureRouting() {
                 call.respond(FreeMarkerContent("indexEntity.ftl", mapOf("entities" to daoEntity.allEntities())))
             }
 
-            get("newEntity") {
-                call.respond(FreeMarkerContent("newEntity.ftl", mapOf("articles" to dao.allArticles())))
+            get("new") {
+                call.respond(FreeMarkerContent("newEntity.ftl", mapOf("article" to dao.allArticles())))
             }
 
             // Crea un nuevo item a partir de los parámetros enviados en el formulario.
@@ -121,7 +121,7 @@ fun Application.configureRouting() {
                 val name = formParameters.getOrFail("name")
                 val description = formParameters.getOrFail("description")
                 val sectionId = formParameters.getOrFail("sectionId")
-                val order = formParameters.getOrFail<Int>("order").toInt()
+                val order = formParameters.getOrFail("order").toInt()
                 val idArticle = formParameters.getOrFail("idArticle").toInt()
                 val entity = daoEntity.addNewEntity(value, name, description, sectionId, order, idArticle)
                 call.respondRedirect("/entities/${entity?.id}")
@@ -129,14 +129,14 @@ fun Application.configureRouting() {
 
             // Para mostrar el contenido de un item específico, se usa el ID del item como parámetro de ruta
             get("{id}") {
-                val id = call.parameters.getOrFail<Int>("id")
+                val id = call.parameters.getOrFail("id").toInt()
                 call.respond(FreeMarkerContent("showEntity.ftl", mapOf("entity" to daoEntity.entity(id))))
             }
             /* Ruta para editar un item. ('call.parameters') se usa para obtener el identificador del item
              y encontrar este item en un almacén
              */
-            get("{id}/editEntity") {
-                val id = call.parameters.getOrFail<Int>("id")
+            get("{id}/edit") {
+                val id = call.parameters.getOrFail("id").toInt()
                 call.respond(FreeMarkerContent("editEntity.ftl", mapOf("entity" to daoEntity.entity(id))))
             }
 
@@ -146,7 +146,7 @@ fun Application.configureRouting() {
             Dependiendo de la acción, el item se actualiza o elimina del almacenamiento.
              */
             post("{id}") {
-                val id = call.parameters.getOrFail<Int>("id")
+                val id = call.parameters.getOrFail("id").toInt()
                 val formParameters = call.receiveParameters()
                 when (formParameters.getOrFail("_action")) {
                     "update" -> {
@@ -154,7 +154,7 @@ fun Application.configureRouting() {
                         val name = formParameters.getOrFail("name")
                         val description = formParameters.getOrFail("description")
                         val sectionId = formParameters.getOrFail("sectionId")
-                        val order = formParameters.getOrFail<Int>("order").toInt()
+                        val order = formParameters.getOrFail("order").toInt()
                         val idArticle = formParameters.getOrFail("idArticle").toInt()
                         daoEntity.editEntity(id, value, name, description, sectionId, order, idArticle)
                         call.respondRedirect("/entities/$id")

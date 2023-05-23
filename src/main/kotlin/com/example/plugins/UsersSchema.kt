@@ -14,14 +14,6 @@ import org.jetbrains.exposed.sql.*
  */
 @Serializable
 data class User(val name: String, val age: Int)
-
-/**
- * Clase que encapsula la funcionalidad de acceso a la base de datos para un recurso de usuario.
- * Se utiliza para realizar operaciones CRUD (Crear, Leer, Actualizar y Eliminar) en la tabla
- * Users de la base de datos.
- * @property database : Database  La clase usa este objeto para realizar transacciones en
- * la base de datos.
- */
 class UserService(private val database: Database) {
     object Users : Table() {
         val id = integer("id").autoIncrement()

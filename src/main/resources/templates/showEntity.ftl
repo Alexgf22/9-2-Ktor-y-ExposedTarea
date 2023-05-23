@@ -23,7 +23,7 @@
 
         <hr>
         <p>
-            <a href="/entities/${entity.id}/editEntity">Edit entity</a>
+            <a href="/entities/${entity.id}/edit">Edit entity</a>
         </p>
     </div>
 </@layout.header>

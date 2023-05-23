@@ -10,6 +10,7 @@
             <p>SectionId: ${entity.sectionId}</p>
             <p>Description: ${entity.description}</p>
             <p>Order: ${entity.order}</p>
+            <p>Id: ${entity.idArticle}</p>
         </div>
 
     </#list>
@@ -17,6 +18,6 @@
 
     <hr>
     <p>
-        <a href="/entities/newEntity">Create entity</a>
+        <a href="/entities/new">Create entity</a>
     </p>
 </@layout.header>

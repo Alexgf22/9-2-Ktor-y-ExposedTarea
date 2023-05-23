@@ -29,11 +29,13 @@
                 <input type="submit">
             </p>
 
-            <select id="selectIdArticle">
-                <#list articles as article>
+            <label for="selectEntity">Selecciona Id:</label>
+            <select id="selectEntity">
+                <#list articles?reverse as article>
                     <option value="${article.id}">${article.id}</option>
                 </#list>
             </select>
+
         </form>
     </div>
 </@layout.header>
