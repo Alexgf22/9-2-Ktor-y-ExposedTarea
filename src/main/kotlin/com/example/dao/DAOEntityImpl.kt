@@ -42,6 +42,28 @@ class DAOEntityImpl : DAOEntity{
 
 
     /**
+     * Obtiene todas las entities asociadas a un article específico pasando el ID del artículo
+     * por parámetro. Lo que hace es mapear cada fila del resultado a un objeto Entity ya después retorna
+     * la lista de entidades relacionadas con el artículo en concreto.
+     * @param articleId: Int  identificador del artículo.
+     * @return List<Entity> todas las entities que coincida con dicho article id.
+     */
+    override suspend fun getEntitiesByArticleId(articleId: Int): List<Entity> = dbQuery {
+        Entities.select { Entities.idArticle eq articleId }.map {
+            Entity(
+                it[Entities.id],
+                it[Entities.value],
+                it[Entities.name],
+                it[Entities.description],
+                it[Entities.sectionId],
+                it[Entities.order],
+                it[Entities.idArticle]
+            )
+        }
+    }
+
+
+    /**
      * @param id: Int   se le pasa un identificador único por parámetro a la función.
      * La función entity es una función suspend que usa la función de orden superior
      * dbQuery para ejecutar la consulta de manera segura en la base de datos.

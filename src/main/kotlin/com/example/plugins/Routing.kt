@@ -58,7 +58,7 @@ fun Application.configureRouting() {
             // Para mostrar el contenido de un artículo específico, se usa el ID del artículo como parámetro de ruta
             get("{id}") {
                 val id = call.parameters.getOrFail("id").toInt()
-                call.respond(FreeMarkerContent("showArticle.ftl", mapOf("article" to dao.article(id))))
+                call.respond(FreeMarkerContent("showArticle.ftl", mapOf("article" to dao.article(id), "entities" to daoEntity.getEntitiesByArticleId(id).toList() ) ))
             }
 
 
@@ -111,7 +111,7 @@ fun Application.configureRouting() {
             }
 
             get("new") {
-                call.respond(FreeMarkerContent("newEntity.ftl", mapOf("article" to dao.allArticles())))
+                call.respond(FreeMarkerContent("newEntity.ftl", model = null))
             }
 
             // Crea un nuevo item a partir de los parámetros enviados en el formulario.

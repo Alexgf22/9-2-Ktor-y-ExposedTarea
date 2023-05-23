@@ -5,6 +5,7 @@ import com.example.models.Entity
 interface DAOEntity {
 
     suspend fun allEntities(): List<Entity>
+    suspend fun getEntitiesByArticleId(articleId: Int): List<Entity>
     suspend fun entity(id: Int): Entity?
     suspend fun addNewEntity(value: String,
                              name: String,

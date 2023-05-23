@@ -25,16 +25,19 @@
                 <textarea name="description"></textarea>
             </p>
 
+            <label for="selectArticle">Selecciona un artículo:</label>
+            <!-- Aquí se añade un select para elegir un id de article -->
+            <select id="selectArticle" name="articleId">
+                <#list articles as article>
+                    <option value="${article.id}">${article.id}</option>
+                </#list>
+            </select>
+
+
             <p>
                 <input type="submit">
             </p>
 
-            <label for="selectEntity">Selecciona Id:</label>
-            <select id="selectEntity">
-                <#list articles?reverse as article>
-                    <option value="${article.id}">${article.id}</option>
-                </#list>
-            </select>
 
         </form>
     </div>
