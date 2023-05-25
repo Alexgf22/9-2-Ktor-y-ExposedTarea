@@ -39,7 +39,7 @@
             <!-- Aquí se añade un select para elegir un id de article -->
             <select id="selectArticle" name="articleId">
                 <#list articles as article>
-                    <option value="${article.id}">${article.id}</option>
+                    <option value="${article.id}" name="articleID">${article.id}</option>
                 </#list>
             </select>
 

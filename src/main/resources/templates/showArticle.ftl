@@ -13,16 +13,19 @@
 
         <h2>Associated Entities</h2>
 
-
-
         <#list entities as entity>
-            <!--<li>ID: ${entity.id}, Value: ${entity.value}, Name: ${entity.name}</li>-->
             <#if entity??>
-                <a href="/entities/${entity.id}">${entity.name}</a><br>
+                <h3>
+                    <a href="/entities/${entity.id}">Entity: ${entity.name}</a>
+                </h3>
+                <p>Value: ${entity.value}</p>
+                <p>SectionId: ${entity.sectionId}</p>
+                <p>Order: ${entity.order}</p>
+                <p>Description: ${entity.description}</p>
+                <p>Id Article: ${entity.idArticle}</p>
             </#if>
         </#list>
-
-
+        <hr>
 
         <p>
             <!-- Este enlace en la parte inferior de esta página debe abrir un formulario
