@@ -20,7 +20,7 @@
         </form>
     </div>
     <div>
-        <form action="/articles/${article.id}" method="post">
+        <form action="/articles/${article.id}" method="post" onsubmit="return confirm('Are you sure you want to remove this article?')">
             <p>
                 <input type="submit" name="_action" value="delete">
             </p>
