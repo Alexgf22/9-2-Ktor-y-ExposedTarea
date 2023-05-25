@@ -1,6 +1,7 @@
 package com.example.models
 
 
+import org.jetbrains.exposed.sql.ReferenceOption
 import org.jetbrains.exposed.sql.Table
 
 data class Entity(
@@ -20,7 +21,7 @@ object Entities: Table() {
     val description = varchar("description", 256)
     val sectionId = varchar("sectionId", 32)
     val order = integer("order")
-    val idArticle = integer("idArticle").references(Articles.id)
+    val idArticle = integer("idArticle").references(Articles.id, onDelete = ReferenceOption.CASCADE)
 
     override val primaryKey = PrimaryKey(id)
 }

@@ -111,7 +111,7 @@ fun Application.configureRouting() {
             }
 
             get("new") {
-                call.respond(FreeMarkerContent("newEntity.ftl", model = null))
+                call.respond(FreeMarkerContent("newEntity.ftl", mapOf("articles" to dao.allArticles())))
             }
 
             // Crea un nuevo item a partir de los parámetros enviados en el formulario.
@@ -137,7 +137,7 @@ fun Application.configureRouting() {
              */
             get("{id}/edit") {
                 val id = call.parameters.getOrFail("id").toInt()
-                call.respond(FreeMarkerContent("editEntity.ftl", mapOf("entity" to daoEntity.entity(id))))
+                call.respond(FreeMarkerContent("editEntity.ftl", mapOf("entity" to daoEntity.entity(id), "articles" to dao.allArticles())))
             }
 
             /*

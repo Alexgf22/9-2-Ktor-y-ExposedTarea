@@ -22,6 +22,8 @@
 <hr>
 <p>
     <a href="/articles/new">Create article</a>
+    <a href="/entities">Redirect to entities site</a>
+
 </p>
 </body>
 </html>

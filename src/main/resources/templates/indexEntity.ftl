@@ -10,7 +10,7 @@
             <p>SectionId: ${entity.sectionId}</p>
             <p>Description: ${entity.description}</p>
             <p>Order: ${entity.order}</p>
-            <p>Id: ${entity.idArticle}</p>
+            <p>IdArticle: ${entity.idArticle}</p>
         </div>
 
     </#list>

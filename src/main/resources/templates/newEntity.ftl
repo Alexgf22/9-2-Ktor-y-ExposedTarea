@@ -18,7 +18,7 @@
             </p>
             <p>
                 <label for="order">Order:</label>
-                <input type="text" name="order">
+                <input type="number" name="order">
             </p>
             <p>
                 <label for="description">Description:</label>
@@ -27,7 +27,7 @@
 
             <label for="selectArticle">Selecciona un artículo:</label>
             <!-- Aquí se añade un select para elegir un id de article -->
-            <select id="selectArticle" name="articleId">
+            <select id="selectArticle" name="idArticle">
                 <#list articles as article>
                     <option value="${article.id}">${article.id}</option>
                 </#list>

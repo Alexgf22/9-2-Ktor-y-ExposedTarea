@@ -1,5 +1,5 @@
 <#-- @ftlvariable name="article" type="com.example.models.Article" -->
-<#-- @ftlvariable name="entities" type="com.example.models.Entity" -->
+<#-- @ftlvariable name="entities" type="kotlin.collections.List<com.example.models.Entity>"-->
 <#import "_layout.ftl" as layout />
 <@layout.header>
     <div>
@@ -14,11 +14,14 @@
         <h2>Associated Entities</h2>
 
 
-        <ul>
-            <#list entities as entity>
-                <li>ID: ${entity.id}, Value: ${entity.value}, Name: ${entity.name}</li>
-            </#list>
-        </ul>
+
+        <#list entities as entity>
+            <!--<li>ID: ${entity.id}, Value: ${entity.value}, Name: ${entity.name}</li>-->
+            <#if entity??>
+                <a href="/entities/${entity.id}">${entity.name}</a><br>
+            </#if>
+        </#list>
+
 
 
         <p>

@@ -20,6 +20,9 @@
         <p>
             Description: ${entity.description}
         </p>
+        <p>
+            ArticleId: ${entity.idArticle}
+        </p>
 
         <hr>
         <p>
