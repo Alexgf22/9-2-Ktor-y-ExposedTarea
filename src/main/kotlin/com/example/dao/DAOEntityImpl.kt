@@ -49,17 +49,7 @@ class DAOEntityImpl : DAOEntity{
      * @return List<Entity> todas las entities que coincida con dicho article id.
      */
     override suspend fun getEntitiesByArticleId(articleId: Int): List<Entity> = dbQuery {
-        Entities.select { Entities.idArticle eq articleId }.map {
-            Entity(
-                it[Entities.id],
-                it[Entities.value],
-                it[Entities.name],
-                it[Entities.description],
-                it[Entities.sectionId],
-                it[Entities.order],
-                it[Entities.idArticle]
-            )
-        }
+        Entities.select { Entities.idArticle eq articleId }.map(::resultRowToEntity)
     }
 
 
